@@ -4,8 +4,8 @@ const btnBig = document.getElementById('btn-kick-big');
 
 const mainHero = {
     name:'Pika',
-    defaultHP: 100,
-    damageHP:100,
+    defaultHP: 150,
+    damageHP:150,
     elHP:document.getElementById('health-character'),
     elProgressBar:document.getElementById('progressbar-character'),
     attack:changeHP,
@@ -15,8 +15,8 @@ const mainHero = {
 }
 const enemyHero = {
     name:'Chamb',
-    defaultHP: 100,
-    damageHP:100,
+    defaultHP: 200,
+    damageHP:200,
     elHP:document.getElementById('health-enemy'),
     elProgressBar:document.getElementById('progressbar-enemy'),
     attack:changeHP,
@@ -51,7 +51,7 @@ function renderHPLife(person) {
     person.elHP.innerText = person.damageHP + ' / ' + person.defaultHP;
 }
 function renderProgressbarHP(person) {
-    person.elProgressBar.style.width = person.damageHP + '%';
+    person.elProgressBar.style.width = person.damageHP / (person.defaultHP/100)  + '%';
 }
 function changeHP(count) {
     if (this.damageHP < count){
