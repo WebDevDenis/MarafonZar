@@ -10,7 +10,8 @@ const mainHero = {
     elProgressBar:document.getElementById('progressbar-character'),
     attack:changeHP,
     update:function () {
-        renderHP(this);
+       this.elHP.innerText = this.damageHP + ' / ' + this.defaultHP;
+       this.elProgressBar.style.width = this.damageHP / (this.defaultHP/100)  + '%';
     },
 }
 const enemyHero = {
@@ -21,7 +22,8 @@ const enemyHero = {
     elProgressBar:document.getElementById('progressbar-enemy'),
     attack:changeHP,
     update:function () {
-        renderHP(this);
+        this.elHP.innerText = this.damageHP + ' / ' + this.defaultHP;
+        this.elProgressBar.style.width = this.damageHP / (this.defaultHP/100)  + '%';
     },
 
 }
@@ -36,23 +38,11 @@ btnBig.addEventListener('click',function () {
     damage(50);
 });
 
-
-
 function init() {
     mainHero.update();
     enemyHero.update();
 }
-function  renderHP(person){
-    renderHPLife(person);
-    renderProgressbarHP(person);
-}
 
-function renderHPLife(person) {
-    person.elHP.innerText = person.damageHP + ' / ' + person.defaultHP;
-}
-function renderProgressbarHP(person) {
-    person.elProgressBar.style.width = person.damageHP / (person.defaultHP/100)  + '%';
-}
 function changeHP(count) {
     if (this.damageHP < count){
         this.damageHP =0;
