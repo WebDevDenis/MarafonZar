@@ -4,22 +4,32 @@ const btnBig = document.getElementById('btn-kick-big');
 
 const mainHero = {
     name:'Pika',
-    defaultHP: 100,
-    damageHP:100,
+    defaultHP: 150,
+    damageHP:150,
     elHP:document.getElementById('health-character'),
     elProgressBar:document.getElementById('progressbar-character'),
-
+    attack:changeHP,
+    update:function () {
+       this.elHP.innerText = this.damageHP + ' / ' + this.defaultHP;
+       this.elProgressBar.style.width = this.damageHP / (this.defaultHP/100)  + '%';
+    },
 }
 const enemyHero = {
     name:'Chamb',
-    defaultHP: 100,
-    damageHP:100,
+    defaultHP: 200,
+    damageHP:200,
     elHP:document.getElementById('health-enemy'),
     elProgressBar:document.getElementById('progressbar-enemy'),
+    attack:changeHP,
+    update:function () {
+        this.elHP.innerText = this.damageHP + ' / ' + this.defaultHP;
+        this.elProgressBar.style.width = this.damageHP / (this.defaultHP/100)  + '%';
+    },
+
 }
 function damage(count) {
-    changeHP(random(count),mainHero);
-    changeHP(random(count),enemyHero);
+    mainHero.attack(random(count));
+    enemyHero.attack(random(count));
 }
 btn.addEventListener('click',function () {
     damage(20);
@@ -28,37 +38,23 @@ btnBig.addEventListener('click',function () {
     damage(50);
 });
 
-
-
 function init() {
-    renderHP(mainHero);
-    renderHP(enemyHero);
-}
-function  renderHP(person){
-    renderHPLife(person);
-    renderProgressbarHP(person);
+    mainHero.update();
+    enemyHero.update();
 }
 
-function renderHPLife(person) {
-    console.log(person.elHP);
-    person.elHP.innerText = person.damageHP + ' / ' + person.defaultHP;
-}
-function renderProgressbarHP(person) {
-    person.elProgressBar.style.width = person.damageHP + '%';
-}
-function changeHP(count,person) {
-    if (person.damageHP < count){
-        person.damageHP =0;
-        alert('Проиграл - '+person.name);
+function changeHP(count) {
+    if (this.damageHP < count){
+        this.damageHP =0;
+        alert('Проиграл - '+this.name);
         btn.disabled = true;
         btnBig.disabled = true;
     }else{
-        person.damageHP -=count;
+        this.damageHP -=count;
     }
-
-    renderHP(person);
+    this.update();
 }
 function random(num) {
-return Math.ceil(Math.random() * num);
+    return Math.ceil(Math.random() * num);
 }
 init();
