@@ -5,7 +5,7 @@ const btnBig = document.getElementById('btn-kick-big');
 const mainHero = {
     name:'Pika',
     defaultHP: 150,
-    damageHP:75,
+    damageHP:150,
     elHP:document.getElementById('health-character'),
     elProgressBar:document.getElementById('progressbar-character'),
     changeHP:changeHP,
@@ -17,7 +17,7 @@ const mainHero = {
 const enemyHero = {
     name:'Chamb',
     defaultHP: 200,
-    damageHP:100,
+    damageHP:200,
     elHP:document.getElementById('health-enemy'),
     elProgressBar:document.getElementById('progressbar-enemy'),
     changeHP:changeHP,
@@ -26,15 +26,41 @@ const enemyHero = {
     renderProgressbarHP: renderProgressbarHP,
 
 }
+function countClick() {
+    let num = 0;
+
+    return function (nameBtn) {
+        num++;
+        if(num >= 4){
+            return false;
+        }else {
+            console.log(`осталось нажатий  на ${nameBtn} - ${(4-num)}`)
+        }
+
+    }
+}
 function damage(count) {
     mainHero.changeHP(random(count));
     enemyHero.changeHP(random(count));
 }
+const countBtn = countClick();
+const countBigBtn = countClick();;
 btn.addEventListener('click',function () {
     damage(20);
+    if(countBtn('btn') === false){
+        this.disabled = true;
+    }
+
+
 });
+
 btnBig.addEventListener('click',function () {
     damage(50);
+
+    if( countBigBtn('btnBig') === false){
+        this.disabled = true;
+    }
+
 });
 
 
@@ -76,7 +102,6 @@ function random(num) {
 }
 
 function generateLog({name}=first,{name: secondName,damageHP} = second,damage) {
-    console.log(secondName)
     const logs = [
         ` ${secondName} вспомнил что-то важное, но неожиданно ${name}, не помня себя от испуга, ударил в предплечье врага. Нанесено урона для ${secondName} - ${damage}, осталось ${damageHP}`,
         ` ${secondName}  поперхнулся, и за это ${name} с испугу приложил прямой удар коленом в лоб врага. Нанесено урона для ${secondName} - ${damage}, осталось ${damageHP}`,
