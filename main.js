@@ -75,18 +75,19 @@ function random(num) {
     return Math.ceil(Math.random() * num);
 }
 
-function generateLog(first,second,damage) {
+function generateLog({name}=first,{name: secondName,damageHP} = second,damage) {
+    console.log(secondName)
     const logs = [
-        `${first.name} вспомнил что-то важное, но неожиданно ${second.name}, не помня себя от испуга, ударил в предплечье врага. Нанесено урона для ${second.name} - ${damage}, осталось ${second.damageHP}`,
-        `${first.name}  поперхнулся, и за это ${second.name} с испугу приложил прямой удар коленом в лоб врага. Нанесено урона для ${second.name} - ${damage}, осталось ${second.damageHP}`,
-        `${first.name}  забылся, но в это время наглый ${second.name}, приняв волевое решение, неслышно подойдя сзади, ударил. Нанесено урона для ${second.name} - ${damage}, осталось ${second.damageHP}`,
-        `${first.name}  пришел в себя, но неожиданно ${second.name} случайно нанес мощнейший удар. Нанесено урона для ${second.name} - ${damage}, осталось ${second.damageHP}`,
-        `${first.name} поперхнулся, но в это время ${second.name} нехотя раздробил кулаком \<вырезанно цензурой\> противника. Нанесено урона для ${second.name} - ${damage}, осталось ${second.damageHP}`,
-        `${first.name} удивился, а ${second.name} пошатнувшись влепил подлый удар. Нанесено урона для ${second.name} - ${damage}, осталось ${second.damageHP}`,
-        `${first.name} высморкался, но неожиданно ${second.name} провел дробящий удар. Нанесено урона для ${second.name} - ${damage}, осталось ${second.damageHP}`,
-        `${first.name} пошатнулся, и внезапно наглый ${second.name} беспричинно ударил в ногу противника Нанесено урона для ${second.name} - ${damage}, осталось ${second.damageHP}`,
-        `${first.name} расстроился, как вдруг, неожиданно ${second.name} случайно влепил стопой в живот соперника. Нанесено урона для ${second.name} - ${damage}, осталось ${second.damageHP}`,
-        `${first.name} пытался что-то сказать, но вдруг, неожиданно ${second.name} со скуки, разбил бровь сопернику. Нанесено урона для ${second.name} - ${damage}, осталось ${second.damageHP}`
+        ` ${secondName} вспомнил что-то важное, но неожиданно ${name}, не помня себя от испуга, ударил в предплечье врага. Нанесено урона для ${secondName} - ${damage}, осталось ${damageHP}`,
+        ` ${secondName}  поперхнулся, и за это ${name} с испугу приложил прямой удар коленом в лоб врага. Нанесено урона для ${secondName} - ${damage}, осталось ${damageHP}`,
+        ` ${secondName}  забылся, но в это время наглый ${name}, приняв волевое решение, неслышно подойдя сзади, ударил. Нанесено урона для ${secondName} - ${damage}, осталось ${damageHP}`,
+        ` ${secondName}  пришел в себя, но неожиданно ${name} случайно нанес мощнейший удар. Нанесено урона для ${secondName} - ${damage}, осталось ${damageHP}`,
+        ` ${secondName} поперхнулся, но в это время ${name} нехотя раздробил кулаком \<вырезанно цензурой\> противника. Нанесено урона для ${secondName} - ${damage}, осталось ${damageHP}`,
+        ` ${secondName} удивился, а ${name} пошатнувшись влепил подлый удар. Нанесено урона для ${secondName} - ${damage}, осталось ${damageHP}`,
+        ` ${secondName} высморкался, но неожиданно ${name} провел дробящий удар. Нанесено урона для ${secondName} - ${damage}, осталось ${damageHP}`,
+        ` ${secondName} пошатнулся, и внезапно наглый ${name} беспричинно ударил в ногу противника Нанесено урона для ${secondName} - ${damage}, осталось ${damageHP}`,
+        ` ${secondName} расстроился, как вдруг, неожиданно ${name} случайно влепил стопой в живот соперника. Нанесено урона для ${secondName} - ${damage}, осталось ${damageHP}`,
+        ` ${secondName} пытался что-то сказать, но вдруг, неожиданно ${name} со скуки, разбил бровь сопернику. Нанесено урона для ${secondName} - ${damage}, осталось ${damageHP}`
     ];
 
     return logs[random(logs.length)-1];
